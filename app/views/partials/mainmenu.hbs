@@ -1,7 +1,16 @@
 <nav class="ui inverted menu">
   <header id="timeline" class="header item"><a href="/timeline"> Booo! </a></header>
   <div class="right menu">
-    <a id="report" class= "item" href="/report"> Report</a>
+    <div class="ui item search">
+      <div class="ui icon input">
+        <form action="/search" method="POST" id="formSearch">
+          <input class="prompt" type="text" name="input" placeholder="Search for scary people...">
+        </form>
+        <i class="search icon"></i>
+      </div>
+      <div class="results"></div>
+    </div>
+    <a id="search" class= "item" onclick="$('#formSearch').submit();"> Search</a>
     <a id="settings" class= "item" href="/settings"> Settings</a>
     <a id="logout" class= "item" href="/logout"> Logout</a>
   </div>

@@ -58,3 +58,30 @@ exports.submitPost = {
     });
   },
 };
+
+exports.searchForUsers = {
+  validate: {
+
+    payload: {
+      input: Joi.string().required(),
+    },
+
+    failAction: function (request, reply, source, error) {
+      reply.view('timeline', {
+        title: 'Searching error',
+        errors: error.data.details,
+      }).code(400);
+    },
+
+    options: {
+      abortEarly: false,
+    },
+  },
+  handler: function (request, reply) {
+    const input = request.payload.input;
+    const regularEx = new RegExp(input, 'i');
+    User.find({ $or: [{ firstName: regularEx }, { lastName: regularEx }] }).then(usersFound => {
+      reply.view('search', { title: 'Search result', input: input, usersFound: usersFound });
+    });
+  },
+};

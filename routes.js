@@ -12,6 +12,7 @@ module.exports = [
   { method: 'GET', path: '/logout', config: Accounts.logout },
   { method: 'GET', path: '/timeline', config: Socialnetwork.timeline },
   { method: 'POST', path: '/submitpost', config: Socialnetwork.submitPost },
+  { method: 'POST', path: '/search', config: Socialnetwork.searchForUsers },
   {
     method: 'GET',
     path: '/{param*}',
