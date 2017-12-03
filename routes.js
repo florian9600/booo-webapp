@@ -11,6 +11,7 @@ module.exports = [
   { method: 'POST', path: '/login', config: Accounts.authenticate },
   { method: 'GET', path: '/logout', config: Accounts.logout },
   { method: 'GET', path: '/timeline', config: Socialnetwork.timeline },
+  { method: 'POST', path: '/submitpost', config: Socialnetwork.submitPost },
   {
     method: 'GET',
     path: '/{param*}',

@@ -26,7 +26,7 @@ exports.register = {
   validate: {
 
     payload: {
-      firstName: Joi.string().required(),
+      text: Joi.string().required(),
       lastName: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
