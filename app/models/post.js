@@ -1,13 +1,11 @@
+'use strict';
+
 const mongoose = require('mongoose');
 
-const donationSchema = mongoose.Schema({
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  },
+const postSchema = mongoose.Schema({
   text: String,
   date: Date,
 });
 
-const Post = mongoose.model('Post', donationSchema);
+const Post = mongoose.model('Post', postSchema);
 module.exports = Post;

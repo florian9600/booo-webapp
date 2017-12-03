@@ -1,0 +1,48 @@
+{
+  "posts": {
+    "_model": "Post",
+    "one": {
+      "text": "I like donuts.",
+      "date": "=new Date(2011, 02, 11)"
+    },
+    "two": {
+      "text": "I like donuts very much.",
+      "date": "=new Date(2012, 03, 12)"
+    },
+    "three": {
+      "text": "I like donuts very very much.",
+      "date": "=new Date(2013, 05, 13)"
+    },
+    "four": {
+      "text": "I don't like donuts.",
+      "date": "=new Date(2013, 11, 14)"
+    }
+  },
+  "users": {
+    "_model": "User",
+    "homer": {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret",
+      "posts": ["->posts.one", "->posts.two", "->posts.three"],
+      "following": ["->users.marge", "->users.bart"]
+    },
+    "marge": {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret",
+      "posts": ["->posts.four"],
+      "following": ["->users.homer"]
+    },
+    "bart": {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret",
+      "posts": [],
+      "following": ["->users.marge"]
+    }
+  }
+}
