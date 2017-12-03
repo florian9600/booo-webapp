@@ -1,13 +1,9 @@
 {{> mainmenu _id="timeline"}}
 
-<section class="ui stacked segment">
-  <div class="ui grid">
-    <aside class="six wide column">
-      <img src="images/boo.png" class="ui medium image">
-    </aside>
-    <article class="ten wide column">
-      <header class="ui  header"> Booo!</header>
-      <p> TIMELINE</p>
-    </article>
-  </div>
-</section>
+<div class="ui segments">
+  <form class="ui horizontal grid segments" action="/submit-post" method="POST">
+    <input class="ui fourteen wide column segment" type="text" name="amount" placeholder="Write something scary...">
+    <div class="ui one wide column segment"><button class="ui blue submit button">Booo!</button></div>
+
+  </form>
+</div>
