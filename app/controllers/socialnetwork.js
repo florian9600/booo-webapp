@@ -18,6 +18,7 @@ exports.user = {
       foundUser.posts.forEach(post => {
         post.name = foundUser.firstName + ' ' + foundUser.lastName;
         post.dateAsString = post.date.getDate() + '/' + (post.date.getMonth() + 1) + '/' +  post.date.getFullYear();
+        post.deletable = request.params.user === request.auth.credentials.loggedInUser;
       });
       reply.view('timeline', { title: 'Booo! Timeline.', user: foundUser });
     }).catch(err => {
@@ -58,6 +59,21 @@ exports.submitPost = {
       }).catch(err => {
         reply.redirect('/');
       });
+    }).catch(err => {
+      reply.redirect('/');
+    });
+  },
+};
+
+exports.deletePost = {
+  handler: function (request, reply) {
+    User.findOne({ _id: request.params.user }).populate('posts').then(foundUser => {
+      foundUser.posts.sort((a, b) => {return b.date - a.date});
+      foundUser.posts.forEach(post => {
+        post.name = foundUser.firstName + ' ' + foundUser.lastName;
+        post.dateAsString = post.date.getDate() + '/' + (post.date.getMonth() + 1) + '/' +  post.date.getFullYear();
+      });
+      reply.view('timeline', { title: 'Booo! Timeline.', user: foundUser });
     }).catch(err => {
       reply.redirect('/');
     });
