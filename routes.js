@@ -13,6 +13,7 @@ module.exports = [
   { method: 'GET', path: '/timeline', config: Socialnetwork.timeline },
   { method: 'POST', path: '/submitpost', config: Socialnetwork.submitPost },
   { method: 'POST', path: '/search', config: Socialnetwork.searchForUsers },
+  { method: 'GET', path: '/user/{user}', config: Socialnetwork.user },
   {
     method: 'GET',
     path: '/{param*}',

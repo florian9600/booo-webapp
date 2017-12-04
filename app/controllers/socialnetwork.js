@@ -7,18 +7,23 @@ const Post = require('../models/post');
 exports.timeline = {
 
   handler: function (request, reply) {
-    User.findOne({ email: request.auth.credentials.loggedInUser }).populate('posts').then(foundUser => {
+    reply.redirect('/user/' + request.auth.credentials.loggedInUser);
+  },
+};
+
+exports.user = {
+  handler: function (request, reply) {
+    User.findOne({ _id: request.params.user }).populate('posts').then(foundUser => {
       foundUser.posts.sort((a, b) => {return b.date - a.date});
       foundUser.posts.forEach(post => {
         post.name = foundUser.firstName + ' ' + foundUser.lastName;
         post.dateAsString = post.date.getDate() + '/' + (post.date.getMonth() + 1) + '/' +  post.date.getFullYear();
       });
-      reply.view('timeline', { title: 'Booo! Your timeline.', user: foundUser });
+      reply.view('timeline', { title: 'Booo! Timeline.', user: foundUser });
     }).catch(err => {
       reply.redirect('/');
     });
   },
-
 };
 
 exports.submitPost = {
@@ -42,7 +47,7 @@ exports.submitPost = {
   },
 
   handler: function (request, reply) {
-    User.findOne({ email: request.auth.credentials.loggedInUser }).populate('posts').then(foundUser => {
+    User.findOne({ _id: request.auth.credentials.loggedInUser }).populate('posts').then(foundUser => {
       request.payload.date = new Date().getTime();
       const post = new Post(request.payload);
 
