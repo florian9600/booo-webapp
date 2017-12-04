@@ -64,16 +64,25 @@ exports.submitPost = {
     });
   },
 };
-
+//request.params.post
 exports.deletePost = {
   handler: function (request, reply) {
-    User.findOne({ _id: request.params.user }).populate('posts').then(foundUser => {
-      foundUser.posts.sort((a, b) => {return b.date - a.date});
+    User.findOne({ _id: request.auth.credentials.loggedInUser }).then(foundUser => {
       foundUser.posts.forEach(post => {
-        post.name = foundUser.firstName + ' ' + foundUser.lastName;
-        post.dateAsString = post.date.getDate() + '/' + (post.date.getMonth() + 1) + '/' +  post.date.getFullYear();
+
       });
-      reply.view('timeline', { title: 'Booo! Timeline.', user: foundUser });
+      let i = foundUser.posts.indexOf(request.params.post);
+      if (i !== -1) {
+        foundUser.posts.splice(i, 1);
+      }
+
+      foundUser.save();
+      Post.findOne({ _id: request.params.post }).then(foundPost => {
+        foundPost.remove();
+        reply.redirect('/timeline');
+      }).catch(err => {
+        reply.redirect('/');
+      });
     }).catch(err => {
       reply.redirect('/');
     });
