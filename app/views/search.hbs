@@ -4,28 +4,9 @@
 
 <div class="ui segment">
   <div class="ui grid">
-    {{#each usersFound}}
+    {{#each usersFound as |user|}}
     <div class="four wide column">
-      <div class="ui card" style="padding: 15px;">
-        <div class="image">
-          <img src="images/boo.png">
-        </div>
-        <div class="content">
-          <a href="/user/{{_id}}" class="header">{{firstName}} {{lastName}}</a>
-          <div class="meta">
-            <span class="date">Joined in 2013</span>
-          </div>
-          <div class="description">
-            Kristy is an art director living in New York.
-          </div>
-        </div>
-        <div class="extra content">
-          <a>
-            <i class="user icon"></i>
-            22 Friends
-          </a>
-        </div>
-      </div>
+      {{> usercard user=user }}
     </div>
     {{/each}}
   </div>

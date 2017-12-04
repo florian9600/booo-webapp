@@ -20,6 +20,7 @@ exports.user = {
         post.dateAsString = post.date.getDate() + '/' + (post.date.getMonth() + 1) + '/' +  post.date.getFullYear();
         post.deletable = request.params.user === request.auth.credentials.loggedInUser;
       });
+      foundUser.joinedYear = foundUser.joined.getFullYear();
       reply.view('timeline', { title: 'Booo! Timeline.', user: foundUser });
     }).catch(err => {
       reply.redirect('/');
@@ -64,7 +65,7 @@ exports.submitPost = {
     });
   },
 };
-//request.params.post
+
 exports.deletePost = {
   handler: function (request, reply) {
     User.findOne({ _id: request.auth.credentials.loggedInUser }).then(foundUser => {
@@ -111,6 +112,9 @@ exports.searchForUsers = {
     const input = request.payload.input;
     const regularEx = new RegExp(input, 'i');
     User.find({ $or: [{ firstName: regularEx }, { lastName: regularEx }] }).then(usersFound => {
+      usersFound.forEach(user => {
+        user.joinedYear = user.joined.getFullYear();
+      });
       reply.view('search', { title: 'Search result', input: input, usersFound: usersFound });
     });
   },

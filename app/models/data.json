@@ -25,6 +25,7 @@
       "lastName": "Simpson",
       "email": "homer@simpson.com",
       "password": "secret",
+      "joined": "=new Date(2010, 05, 13)",
       "posts": ["->posts.one", "->posts.two", "->posts.three"],
       "following": ["->users.marge", "->users.bart"]
     },
@@ -33,6 +34,7 @@
       "lastName": "Simpson",
       "email": "marge@simpson.com",
       "password": "secret",
+      "joined": "=new Date(2009, 05, 13)",
       "posts": ["->posts.four"],
       "following": ["->users.homer"]
     },
@@ -41,6 +43,7 @@
       "lastName": "Simpson",
       "email": "bart@simpson.com",
       "password": "secret",
+      "joined": "=new Date(2008, 05, 13)",
       "posts": [],
       "following": ["->users.marge"]
     }

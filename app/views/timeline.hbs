@@ -1,35 +1,45 @@
 {{> mainmenu _id="timeline"}}
 
-<div class="ui segments">
-  <form class="ui horizontal grid segments" action="/submitpost" method="POST">
-    <input class="ui fourteen wide column segment" type="text" name="text" placeholder="Write something scary...">
-    <div class="ui one wide column segment"><button class="ui purple submit button">Booo!</button></div>
-  </form>
-</div>
-<div class="ui segments">
-  <div style="padding: 12px">
-  {{#each user.posts}}
-  <div class="ui comments">
-    <div class="comment">
-      <a class="avatar">
-        <img src="/images/boo.png" style="height: 35px; width: 35px;">
-      </a>
-      <div class="content">
-        <a class="author">{{name}}</a>
-        <div class="metadata">
-          <span class="date">{{dateAsString}}</span>
-        </div>
-        <div class="text">
-          {{text}}
-        </div>
-        <div class="actions">
-          {{#if deletable}}
-          <a class="delete" href="/deletepost/{{_id}}">Delete</a>
-          {{/if}}
+<div class="ui grid">
+  <div class="four wide column">
+    {{> usercard user=user }}
+  </div>
+  <div class="twelve wide column">
+    <form class="ui horizontal segment grid" action="/submitpost" method="POST" style="margin-top: 0;">
+      <div class="fourteen wide column" >
+        <div class="ui input" style="width: 100%;">
+          <input type="text" name="text" placeholder="Write something scary...">
         </div>
       </div>
+      <div class="two wide column"><button class="ui purple submit button">Booo!</button></div>
+      {{> formerror }}
+    </form>
+    <div class="ui segments">
+      <div style="padding: 12px">
+        {{#each user.posts}}
+        <div class="ui comments">
+          <div class="comment">
+            <a class="avatar">
+              <img src="/images/boo.png" style="height: 35px; width: 35px;">
+            </a>
+            <div class="content">
+              <a class="author">{{name}}</a>
+              <div class="metadata">
+                <span class="date">{{dateAsString}}</span>
+              </div>
+              <div class="text">
+                {{text}}
+              </div>
+              <div class="actions">
+                {{#if deletable}}
+                <a class="delete" href="/deletepost/{{_id}}">Delete</a>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
     </div>
-  </div>
-  {{/each}}
   </div>
 </div>

@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
   lastName: String,
   email: String,
   password: String,
+  joined: Date,
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
