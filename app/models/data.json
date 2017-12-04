@@ -26,6 +26,7 @@
       "email": "homer@simpson.com",
       "password": "secret",
       "joined": "=new Date(2010, 05, 13)",
+      "description": "Marge's husband. Father of Bart, Lisa, and Maggie. Lazy.",
       "posts": ["->posts.one", "->posts.two", "->posts.three"],
       "following": ["->users.marge", "->users.bart"]
     },
@@ -35,6 +36,7 @@
       "email": "marge@simpson.com",
       "password": "secret",
       "joined": "=new Date(2009, 05, 13)",
+      "description": "Homer's wife. Mother of Bart, Lisa, and Maggie. Housewife.",
       "posts": ["->posts.four"],
       "following": ["->users.homer"]
     },
@@ -44,6 +46,7 @@
       "email": "bart@simpson.com",
       "password": "secret",
       "joined": "=new Date(2008, 05, 13)",
+      "description": "4th grade student at Springfield Elementary School. The eldest child and only son.",
       "posts": [],
       "following": ["->users.marge"]
     }

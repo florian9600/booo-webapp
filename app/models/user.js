@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
   email: String,
   password: String,
   joined: Date,
+  description: String,
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
