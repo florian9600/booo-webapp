@@ -114,3 +114,59 @@ exports.logout = {
   },
 
 };
+
+exports.viewSettings = {
+
+  handler: function (request, reply) {
+    User.findOne({ _id: request.auth.credentials.loggedInUser }).then(foundUser => {
+      reply.view('settings', { title: 'Edit Account Settings', user: foundUser });
+    }).catch(err => {
+      reply.redirect('/');
+    });
+  },
+
+};
+
+exports.updateSettings = {
+
+  validate: {
+
+    payload: {
+      firstName: Joi.string().required(),
+      lastName: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+      description: Joi.string().required(),
+    },
+
+    options: {
+      abortEarly: false,
+    },
+
+    failAction: function (request, reply, source, error) {
+      reply.view('main', {
+        title: 'Update settings error',
+        errors: error.data.details,
+      }).code(400);
+    },
+
+  },
+
+  handler: function (request, reply) {
+    const editedUser = request.payload;
+
+    User.findOne({ _id: request.auth.credentials.loggedInUser }).then(user => {
+      user.firstName = editedUser.firstName;
+      user.lastName = editedUser.lastName;
+      user.email = editedUser.email;
+      user.password = editedUser.password;
+      user.description = editedUser.description;
+      return user.save();
+    }).then(user => {
+      reply.view('settings', { title: 'Edit Account Settings', user: user });
+    }).catch(err => {
+      reply.redirect('/');
+    });
+  },
+
+};
