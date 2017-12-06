@@ -12,9 +12,20 @@
     </div>
   </div>
   <div class="extra content">
-    <a>
-      <i class="user icon"></i>
-      21 followers
-    </a>
+    {{#if user.yourself}}
+      <a>
+        <i class="heart icon"></i>
+        {{user.followers}} followers
+      </a>
+    {{else}}
+      <div class="ui labeled button" tabindex="0">
+        <a class="ui {{#if user.isFollowing}}inverted{{/if}} purple button" href="/{{#if user.isFollowing}}un{{/if}}follow/{{user._id}}">
+          <i class="heart icon"></i>{{#if user.isFollowing}} Unfollow{{else}} Follow{{/if}}
+        </a>
+        <a class="ui basic purple left pointing label">
+          {{user.followers}}
+        </a>
+      </div>
+    {{/if}}
   </div>
 </div>

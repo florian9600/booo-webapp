@@ -9,6 +9,7 @@ const userSchema = mongoose.Schema({
   password: String,
   joined: Date,
   description: String,
+  followers: Number,
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId,

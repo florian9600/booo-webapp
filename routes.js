@@ -15,6 +15,8 @@ module.exports = [
   { method: 'POST', path: '/search', config: Socialnetwork.searchForUsers },
   { method: 'GET', path: '/user/{user}', config: Socialnetwork.user },
   { method: 'GET', path: '/deletepost/{post}', config: Socialnetwork.deletePost },
+  { method: 'GET', path: '/follow/{user}', config: Socialnetwork.follow },
+  { method: 'GET', path: '/unfollow/{user}', config: Socialnetwork.unfollow },
   {
     method: 'GET',
     path: '/{param*}',

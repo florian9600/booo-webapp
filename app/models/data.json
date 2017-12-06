@@ -27,8 +27,9 @@
       "password": "secret",
       "joined": "=new Date(2010, 05, 13)",
       "description": "Marge's husband. Father of Bart, Lisa, and Maggie. Lazy.",
+      "followers": 0,
       "posts": ["->posts.one", "->posts.two", "->posts.three"],
-      "following": ["->users.marge", "->users.bart"]
+      "following": []
     },
     "marge": {
       "firstName": "Marge",
@@ -37,8 +38,9 @@
       "password": "secret",
       "joined": "=new Date(2009, 05, 13)",
       "description": "Homer's wife. Mother of Bart, Lisa, and Maggie. Housewife.",
+      "followers": 0,
       "posts": ["->posts.four"],
-      "following": ["->users.homer"]
+      "following": []
     },
     "bart": {
       "firstName": "Bart",
@@ -47,8 +49,9 @@
       "password": "secret",
       "joined": "=new Date(2008, 05, 13)",
       "description": "4th grade student at Springfield Elementary School. The eldest child and only son.",
+      "followers": 0,
       "posts": [],
-      "following": ["->users.marge"]
+      "following": []
     }
   }
 }
