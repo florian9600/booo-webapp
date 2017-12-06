@@ -37,7 +37,7 @@ exports.submitPost = {
   validate: {
 
     payload: {
-      text: Joi.string().required(),
+      text: Joi.string().max(140).required(),
     },
 
     failAction: function (request, reply, source, error) {
