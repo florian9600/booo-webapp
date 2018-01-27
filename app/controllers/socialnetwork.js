@@ -24,7 +24,7 @@ exports.user = {
       User.findOne({ _id: request.auth.credentials.loggedInUser }).then(loggedInUser => {
         foundUser.yourself = loggedInUser._id.toString() === foundUser._id.toString();
         foundUser.isFollowing = loggedInUser.following.indexOf(foundUser._id.toString()) !== -1;
-        reply.view('timeline', { title: 'Booo! Timeline.', user: foundUser });
+        reply.view('timeline', { title: foundUser.firstName + '\'s timeline.', user: foundUser, posts: foundUser.posts });
       });
     }).catch(err => {
       reply.redirect('/');
@@ -41,10 +41,19 @@ exports.submitPost = {
     },
 
     failAction: function (request, reply, source, error) {
-      reply.view('timeline', {
-        title: 'Posting error',
-        errors: error.data.details,
-      }).code(400);
+      User.findOne({ _id: request.auth.credentials.loggedInUser }).populate('posts').then(loggedInUser => {
+          loggedInUser.yourself = true;
+          loggedInUser.joinedYear = loggedInUser.joined.getFullYear();
+          loggedInUser.posts.sort((a, b) => {return b.date - a.date});
+          loggedInUser.posts.forEach(post => {
+            post.name = loggedInUser.firstName + ' ' + loggedInUser.lastName;
+            post.dateAsString = post.date.getDate() + '/' + (post.date.getMonth() + 1) + '/' +  post.date.getFullYear();
+            post.deletable = true;
+          });
+          reply.view('timeline', { title: 'Posting error.', errors: error.data.details, user: loggedInUser, posts: loggedInUser.posts }).code(400);
+        }).catch(err => {
+        reply.redirect('/');
+      });
     },
 
     options: {
@@ -99,7 +108,7 @@ exports.searchForUsers = {
     },
 
     failAction: function (request, reply, source, error) {
-      reply.view('timeline', {
+      reply.view('search', {
         title: 'Searching error',
         errors: error.data.details,
       }).code(400);

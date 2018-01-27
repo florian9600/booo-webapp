@@ -2,8 +2,8 @@
 
 const mongoose = require('mongoose');
 
-//let dbURI = 'mongodb://donationuser:donationuser@ds127506.mlab.com:27506/donation';
-let dbURI = 'mongodb://localhost/twitter';
+let dbURI = 'mongodb://donationuser:donationuser@ds127506.mlab.com:27506/donation';
+//let dbURI = 'mongodb://localhost/twitter';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }

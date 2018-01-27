@@ -46,6 +46,7 @@ exports.register = {
   handler: function (request, reply) {
     request.payload.joined = new Date().getTime();
     request.payload.description = 'Scary new user without proper description!';
+    request.payload.followers = 0;
     const user = new User(request.payload);
 
     user.save().then(newUser => {
