@@ -6,7 +6,7 @@ To run this project, MongoDB is needed. Path to the data base can be set in 'app
 
 Some test data is being created with every start of the Node.js server. For example you can just log in as:
 
-E-mail: homer@simpson.com</br.
+E-mail: homer@simpson.com</br>
 Password: secret</br>
 
 and start searching for the whole Simpson family by typing "simpson" in the search field.
